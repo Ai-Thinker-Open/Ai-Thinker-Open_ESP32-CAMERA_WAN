@@ -1,0 +1,11 @@
+1、选择安信可的cam模组
+2、填入测试临时使用的ID和key
+	|
+	ID：oasooyjx.zuzcni.trial.nabto.net
+	KEY：6293d12bdd52c14db726baee49aeab6d
+	
+3、安装手机客户端
+	|
+	https://play.google.com/store/apps/details?id=com.appmyproduct.video
+	https://itunes.apple.com/lc/app/appmyproduct-video-client/id1276975254
+4、可以选择使用手动填写或是smartconfig配网，使用smartconfig配网需要下载手机客户端“esptouch”
