@@ -70,7 +70,7 @@ http://esp-idf.readthedocs.io/en/stable/get-started/index.html
 
 
 ```
-git clone --recursive https://github.com/AI-Thinker-wm/wan.git
+git clone --recursive https://github.com/Ai-Thinker-Open/Ai-Thinker-Open_ESP32-CAMERA_WAN.git
 ```
 
 ## Step 3: Make menuconfig
