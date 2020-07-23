@@ -1,5 +1,7 @@
 # uNabto ESP32 cam demo
 
+Using Nabto's SDK, the smartConfig network function has been added. Thanks to Nabto's technical support, I solved the problem of network delay.
+
 This project turns the ESP32-CAM into a remote P2P accesible surveillance camera.
 It uses the esp-idf FreeRTOS based core (vs. some other demos which uses the arduino core).
 Also it uses the espressif esp32-cam library with slight modification (we could not get the reset to work).
@@ -68,7 +70,7 @@ http://esp-idf.readthedocs.io/en/stable/get-started/index.html
 
 
 ```
-git clone --recursive https://github.com/nabto/nabto-esp32cam.git
+git clone --recursive https://github.com/AI-Thinker-wm/wan.git
 ```
 
 ## Step 3: Make menuconfig

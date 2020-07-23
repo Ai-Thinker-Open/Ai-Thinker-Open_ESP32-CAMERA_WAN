@@ -39,5 +39,13 @@ menu "Camera configuration"
 			bool "M5Stack Camera A"	
 	endchoice
 
+menu "smart config"
+config ESP_SMAERT_CONFIG
+    bool "smart config enabled"
+    default n
+    help
+        Enables smart config.
+		
+endmenu
 
 endmenu

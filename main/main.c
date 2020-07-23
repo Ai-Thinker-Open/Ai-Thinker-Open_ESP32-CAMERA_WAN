@@ -22,6 +22,9 @@
 #include <unabto/unabto_app.h>
 #include <unabto_tunnel_select.h>
 
+#include "app_smart_wifi.h"
+
+
 // Set in menuconfig .. or override here
 #define WIFI_SSID CONFIG_SSID
 #define WIFI_PASS CONFIG_SSID_PASSWORD
@@ -30,7 +33,9 @@
 
 
 // Event group
-static EventGroupHandle_t wifi_event_group;
+//static EventGroupHandle_t wifi_event_group;
+EventGroupHandle_t wifi_event_group;
+
 const int CONNECTED_BIT = BIT0;
 
 #ifdef CONFIG_ESP_EYE
@@ -100,7 +105,6 @@ const int CONNECTED_BIT = BIT0;
 
 #define CAM_XCLK_FREQ   20000000
 
-
 static camera_config_t camera_config = {
     .pin_pwdn  = CAM_PIN_PWDN,
     .pin_reset = CAM_PIN_RESET,
@@ -129,11 +133,11 @@ static camera_config_t camera_config = {
     .frame_size = FRAMESIZE_VGA,//QQVGA-QXGA Do not use sizes above QVGA when not JPEG
 
     .jpeg_quality = 10, //0-63 lower number means higher quality
-    .fb_count = 2 //if more than one, i2s runs in continuous mode. Use only with JPEG
+    .fb_count = 5 //if more than one, i2s runs in continuous mode. Use only with JPEG  //{ 2
 };
 
 
-
+#ifndef CONFIG_ESP_SMAERT_CONFIG
 
 /*
  * WIFI event handler
@@ -161,7 +165,7 @@ static esp_err_t event_handler(void *ctx, system_event_t *event)
     
     return ESP_OK;
 }
-
+#endif
 /*
  * Convert hex to i (for converting the hex key to bytebuffer)
  */
@@ -493,10 +497,11 @@ void app_main()
       NABTO_LOG_ERROR(("!!!!!WARNING... HMAC_SHA256 test not completed"));
   }
   */
-  
   // create the event group to handle wifi events
   wifi_event_group = xEventGroupCreate();
-  
+#ifdef CONFIG_ESP_SMAERT_CONFIG
+	initialise_wifi();
+#else 
   // initialize the tcp stack
   tcpip_adapter_init();
   
@@ -518,8 +523,9 @@ void app_main()
   };
   ESP_ERROR_CHECK(esp_wifi_set_config(ESP_IF_WIFI_STA, &wifi_config));
   ESP_ERROR_CHECK(esp_wifi_start());
+
+#endif
   NABTO_LOG_INFO(("Connecting to %s\n", WIFI_SSID));
-  
   // start the main task
   xTaskCreate(&main_task, "main_task", 8192, NULL, 5, NULL);
 
